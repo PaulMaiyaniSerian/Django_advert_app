@@ -1,0 +1,284 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>lordberus</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/styles.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+</head>
+
+<body>
+        <nav class="navbar navbar-dark navbar-expand-md sticky-top" id="app-navbar">
+        <div class="container-fluid"><a class="navbar-brand" href="#"><p id="brand-logo">paul</p></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link " id="nav-link"   href="{% url 'homepage' %}">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link " href="{% url 'view_gallery_items' %}">Gallery</a></li>
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Account</a>
+                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="{% url 'register' %}">Register</a><a class="dropdown-item" role="presentation" href="{% url 'login' %}">Login</a><a class="dropdown-item" role="presentation" href="#">Subscribe</a></div>
+                    </li>
+                    <li class="nav-item" role="presentation"><a class="nav-link " href="{% url 'about_us' %}">About</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="{% url 'contacts' %}">Contacts</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'tutorial' %}">Tutorials</a></li>
+                     {% if user.is_authenticated %}
+                     <li class="nav-item" role="presentation"><a class="btn btn-warning" role="button" href="{% url 'logout' %}">Logout {{user.username}}</a></li>
+                    {% else %}
+                     <li class="nav-item" role="presentation"><a class="btn btn-warning" role="button" href="{% url 'login' %}">Login</a></li>
+                     {% endif %}
+                </ul>
+        </div>
+        </div>
+    </nav>
+    <div>
+        <div class="container-fluid">
+            <h1 class="text-center">Contact Information</h1>
+            <hr>
+        <form id="contactForm" action="{% url 'contacts' %}" method="POST"><input class="form-control" type="hidden" name="Introduction" value="This email was sent from www.awebsite.com"><input class="form-control" type="hidden" name="subject" value="Awebsite.com Contact Form"><input class="form-control" type="hidden"
+                        name="to" value="email@awebsite.com">
+                         {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div id="successfail"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-12 col-md-6" id="message">
+                            <h2 class="h4"><i class="fa fa-envelope"></i> Contact Us<small><small class="required-input">&nbsp;(*required)</small></small>
+                            </h2>
+                            <div class="form-group"><label for="from-name">Name</label><span class="required-input">*</span>
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user-o"></i></span></div><input class="form-control" type="text" id="from-name" name="name" required="" placeholder="Full Name"></div>
+                            </div>
+                            <div class="form-group"><label for="from-email">Email</label><span class="required-input">*</span>
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope-o"></i></span></div><input class="form-control" type="text" id="from-email" name="email" required="" placeholder="Email Address"></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+                                    <div class="form-group"><label for="from-phone">Phone</label><span class="required-input">*</span>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone"></i></span></div><input class="form-control" type="text" id="from-phone" name="phone" required="" placeholder="Primary Phone"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+                                    <div class="form-group"><label for="from-calltime">Best Time to Call</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div><select class="form-control" id="from-calltime" name="call_time"><optgroup label="Best Time to Call"><option value="Morning" selected="">Morning</option><option value="Afternoon">Afternoon</option><option value="Evening">Evening</option></optgroup></select></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group"><label for="from-comments">Comments</label><textarea class="form-control" id="from-comments" name="comments" placeholder="Enter Comments" rows="5"></textarea></div>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col"><button class="btn btn-primary btn-block" type="reset"><i class="fa fa-undo"></i> Reset</button></div>
+                                    <div class="col"><button class="btn btn-primary btn-block" type="submit">Submit <i class="fa fa-chevron-circle-right"></i></button></div>
+                                </div>
+                            </div>
+                            <hr class="d-flex d-md-none">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <h2 class="h4"><i class="fa fa-location-arrow"></i> Locate Us</h2>
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <div class="static-map"><a rel="noopener" href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15956.542780670372!2d37.093856281721386!3d-1.0598841876298912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f4fb53d8f5581%3A0x4261933def037bb6!2sMakongeni%2C%20Thika!5e0!3m2!1sen!2ske!4v1598721980633!5m2!1sen!2ske"
+                                            target="_blank"> <img class="img-fluid" src=""><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15956.542780670372!2d37.093856281721386!3d-1.0598841876298868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f4fb53d8f5581%3A0x4261933def037bb6!2sMakongeni%2C%20Thika!5e0!3m2!1sen!2ske!4v1598722343056!5m2!1sen!2ske" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></a></div>
+                                </div>
+                                <div class="col-sm-6 col-md-12 col-lg-6">
+                                    <h2 class="h4"><i class="fa fa-user"></i> Our Info</h2>
+                                    <div><span><strong>Name</strong></span></div>
+                                    <div><span>paulmaiyanideveloper@gmail.com</span></div>
+                                    <div><span>www.TyrantDevelopers.com</span></div>
+                                    <hr class="d-sm-none d-md-block d-lg-none">
+                                </div>
+                                <div class="col-sm-6 col-md-12 col-lg-6">
+                                    <h2 class="h4"><i class="fa fa-location-arrow"></i> Our Address</h2>
+                                    <div><span><strong>Office Name</strong></span></div>
+                                    <div><span>55 Icannot Dr</span></div>
+                                    <div><span>Thika, Makongeni</span></div>
+                                    <div><abbr data-toggle="tooltip" data-placement="top" title="Office Phone: 555-867-5309">O:</abbr> +254-759-288-121</div>
+                                    <hr class="d-sm-none">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+        </div>
+        <div class="modal fade" role="dialog" tabindex="-1" id="modal1">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Contact Information</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                    <div class="modal-body">
+             <form id="contactForm" action="javascript:void(0);" method="get"><input class="form-control" type="hidden" name="Introduction" value="This email was sent from www.awebsite.com"><input class="form-control" type="hidden" name="subject" value="Awebsite.com Contact Form"><input class="form-control"
+                                    type="hidden" name="to" value="email@awebsite.com">
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div id="successfail"></div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-12 col-md-6" id="message">
+                                        <h2 class="h4"><i class="fa fa-envelope"></i> Contact Us<small><small class="required-input">&nbsp;(*required)</small></small>
+                                        </h2>
+                                        <div class="form-group"><label for="from-name">Name</label><span class="required-input">*</span>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user-o"></i></span></div><input class="form-control" type="text" id="from-name" name="name" required="" placeholder="Full Name"></div>
+                                        </div>
+                                        <div class="form-group"><label for="from-email">Email</label><span class="required-input">*</span>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope-o"></i></span></div><input class="form-control" type="text" id="from-email" name="email" required="" placeholder="Email Address"></div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+                                                <div class="form-group"><label for="from-phone">Phone</label><span class="required-input">*</span>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone"></i></span></div><input class="form-control" type="text" id="from-phone" name="phone" required="" placeholder="Primary Phone"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+                                                <div class="form-group"><label for="from-calltime">Best Time to Call</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div><select class="form-control" id="from-calltime" name="call time"><optgroup label="Best Time to Call"><option value="Morning" selected="">Morning</option><option value="Afternoon">Afternoon</option><option value="Evening">Evening</option></optgroup></select></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group"><label for="from-comments">Comments</label><textarea class="form-control" id="from-comments" name="comments" placeholder="Enter Comments" rows="5"></textarea></div>
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="col"><button class="btn btn-primary btn-block" type="reset"><i class="fa fa-undo"></i> Reset</button></div>
+                                                <div class="col"><button class="btn btn-primary btn-block" type="submit">Submit <i class="fa fa-chevron-circle-right"></i></button></div>
+                                            </div>
+                                        </div>
+                                        <hr class="d-flex d-md-none">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <h2 class="h4"><i class="fa fa-location-arrow"></i> Locate Us</h2>
+                                        <div class="form-row">
+                                            <div class="col-12">
+                                                <div class="static-map"><a rel="noopener" href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15956.542780670372!2d37.093856281721386!3d-1.0598841876298912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f4fb53d8f5581%3A0x4261933def037bb6!2sMakongeni%2C%20Thika!5e0!3m2!1sen!2ske!4v1598721980633!5m2!1sen!2ske"
+                                                    target="_blank"> <img class="img-fluid" src=""><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15956.542780670372!2d37.093856281721386!3d-1.0598841876298868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f4fb53d8f5581%3A0x4261933def037bb6!2sMakongeni%2C%20Thika!5e0!3m2!1sen!2ske!4v1598722343056!5m2!1sen!2ske" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></a></div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                                <h2 class="h4"><i class="fa fa-user"></i> Our Info</h2>
+                                                <div><span><strong>Name</strong></span></div>
+                                                <div><span>email@awebsite.com</span></div>
+                                                <div><span>www.awebsite.com</span></div>
+                                                <hr class="d-sm-none d-md-block d-lg-none">
+                                            </div>
+                                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                                <h2 class="h4"><i class="fa fa-location-arrow"></i> Our Address</h2>
+                                                <div><span><strong>Office Name</strong></span></div>
+                                                <div><span>55 Icannot Dr</span></div>
+                                                <div><span>Daytone Beach, FL 85150</span></div>
+                                                <div><abbr data-toggle="tooltip" data-placement="top" title="Office Phone: 555-867-5309">O:</abbr> 555-867-5309</div>
+                                                <hr class="d-sm-none">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section id="carousel">
+        <div class="carousel slide" data-ride="carousel" id="carousel-1">
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item">
+                    <div class="jumbotron pulse animated hero-nature carousel-hero">
+                        <h1 class="hero-title">Hero Nature</h1>
+                        <p class="hero-subtitle">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                        <p><a class="btn btn-primary hero-button plat" role="button" href="#">Learn more</a></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="jumbotron pulse animated hero-photography carousel-hero">
+                        <h1 class="hero-title">Hero Photography</h1>
+                        <p class="hero-subtitle">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                        <p><a class="btn btn-primary hero-button plat" role="button" href="#">Learn more</a></p>
+                    </div>
+                </div>
+                <div class="carousel-item active">
+                    <div class="jumbotron pulse animated hero-technology carousel-hero">
+                        <h1 class="hero-title">Hero Technology</h1>
+                        <p class="hero-subtitle">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                        <p><a class="btn btn-primary hero-button plat" role="button" href="#">Learn more</a></p>
+                    </div>
+                </div>
+            </div>
+            <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><i class="fa fa-chevron-left"></i><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next"><i class="fa fa-chevron-right"></i><span class="sr-only">Next</span></a></div>
+            <ol
+                class="carousel-indicators">
+                <li data-target="#carousel-1" data-slide-to="0"></li>
+                <li data-target="#carousel-1" data-slide-to="1"></li>
+                <li data-target="#carousel-1" data-slide-to="2" class="active"></li>
+                </ol>
+        </div>
+    </section>
+    <footer id="myFooter">
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <h5>Get started</h5>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Downloads</a></li>
+                        <li><a href="#">Sign up</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <h5>Get started</h5>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Downloads</a></li>
+                        <li><a href="#">Sign up</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <h5>Get started</h5>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Downloads</a></li>
+                        <li><a href="#">Sign up</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h5>Get started</h5>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Downloads</a></li>
+                        <li><a href="#">Sign up</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row social-networks">
+                <div class="col"><a class="facebook" href="https://facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a><a class="twitter" href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a><a class="google" href="https://plus.google.com/"
+                        target="_blank"><i class="fa fa-google-plus"></i></a><a class="linkedin" href="https://linkedin.com/" target="_blank"><i class="fa fa-linkedin"></i></a></div>
+            </div>
+            <div class="row footer-copyright">
+                <div class="col">
+                    <p>© 2020 Copyright ~ Designed By&nbsp;<a href="#" target="_blank">Paul Maiyani Serian</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/script.min.js' %}"></script>
+</body>
+
+</html>

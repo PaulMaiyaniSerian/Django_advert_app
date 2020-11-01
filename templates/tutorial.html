@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>lordberus</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/styles.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+</head>
+
+<body>
+     <nav class="navbar navbar-dark navbar-expand-md sticky-top" id="app-navbar">
+        <div class="container-fluid"><a class="navbar-brand" href="#"><p id="brand-logo">paul</p></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link " id="nav-link"   href="{% url 'homepage' %}">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link " href="{% url 'view_gallery_items' %}">Gallery</a></li>
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Account</a>
+                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="{% url 'register' %}">Register</a><a class="dropdown-item" role="presentation" href="{% url 'login' %}">Login</a><a class="dropdown-item" role="presentation" href="#">Subscribe</a></div>
+
+                    </li>
+                    <li class="nav-item" role="presentation"><a class="nav-link " href="{% url 'about_us' %}">About</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'contacts' %}">Contacts</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="{% url 'tutorial' %}">Tutorials</a></li>
+                     {% if user.is_authenticated %}
+                     <li class="nav-item" role="presentation"><a class="btn btn-warning" role="button" href="{% url 'logout' %}">Logout {{user.username}}</a></li>
+                    {% else %}
+                     <li class="nav-item" role="presentation"><a class="btn btn-warning" role="button" href="{% url 'login' %}">Login</a></li>
+                     {% endif %}
+                </ul>
+        </div>
+        </div>
+    </nav>
+    <h1 class="text-center text-body">Tutorial Course Section</h1>
+    <div class="d-flex justify-content-center" style="margin: 22px;"><input class="bg-warning border rounded border-secondary shadow-sm form-control-sm" type="search" autocomplete="on" placeholder="search category" required=""><!--<i class="fas fa-search shadow-sm" style="width: 15px;font-size: 28px;padding: 5px;margin: -3px;margin-left: 16px;padding-left: 1px;"></i>--></div>
+    {% for tutorial in tutorials %}
+    <div>
+        <div class="d-flex justify-content-center"><iframe class="border rounded border-danger shadow-sm" src={{tutorial.url}} allowfullscreen="" frameborder="0" width="560" height="315"></iframe></div>
+        <h4 class="text-center text-muted">{{tutorial.title}}</h4>
+    </div>
+    <hr>
+  {% endfor %}
+   
+    
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/script.min.js' %}"></script>
+</body>
+
+</html>

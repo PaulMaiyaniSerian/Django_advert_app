@@ -1,0 +1,79 @@
+django==3.0.6
+pillow
+urllib3==1.25.9
+
+
+MESSAGE MODEL ??completed
+name
+email
+phone
+time
+comments
+
+GALLEERY MODEL ??completed
+picture 
+title
+description
+by
+
+OTHER GALLEERY ?? completed
+picture 
+title
+descriptiom
+by
+
+USER MODEL ?? profile...later
+picture
+telephone
+bio
+name
+email
+password
+1st name
+last name
+
+APPS OFFERED ??
+1.simple website
+2.moderate website
+3.Large webapp
+# for the time being
+4.android APPS
+5.rest apis
+6.scraper
+
+
+
+APP REQUEST /////
+user == fk from user
+type of app == fk from apps OFFERED
+budget
+extra info
+
+TUTORIAL SECTION ////
+1.title 
+2.video play from youtube
+3.description
+# 4.applications in list form
+# 5.text
+
+
+
+FUNCTIONALITIES
+1.send email to users
+2.receive message from users
+3.request for app from users
+4.reset password FUNCTIONALITIES
+5.Authentication system
+6.pay to consult a developer about an app..200ksh
+7.admin system:
+    1.read messages 
+    2.send email to all users
+    3.send email to individuals
+    4.post GALLEERY
+    5.post TUTORIAL
+    
+
+later ...
+chat functionality
+adsense
+
